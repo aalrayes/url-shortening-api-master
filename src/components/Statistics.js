@@ -30,7 +30,7 @@ export default function Statistics() {
   ];
   return (
     <section className="bg-slate-100 w-screen  font-poppins pb-20">
-      <div className="w-desktop flex-col mx-auto p-10">
+      <div className=" max-w-desktop w-5/6  flex-col mx-auto p-10">
         <div className="flex flex-col">
           <h1 className="text-veryDarkBlue text-center mt-32 text-4xl font-bold">
             Advanced Statistics

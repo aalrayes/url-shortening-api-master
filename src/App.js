@@ -8,7 +8,7 @@ import Statistics from "./components/Statistics";
 function App() {
   return (
     <>
-      <main className=" w-desktop mx-auto font-poppins  ">
+      <main className=" max-w-desktop w-4/5 mx-auto font-poppins  ">
         <Nav />
         <Hero />
         <LinkShortener />
