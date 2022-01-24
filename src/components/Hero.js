@@ -9,8 +9,17 @@ export default function Hero() {
           Build your brand’s recognition and get detailed insights on how your
           links are performing.
         </p>
-        <button className="bg-cyan hover:bg-c text-white w-40 py-3 mt-4 rounded-3xl font-medium hover:bg-cyan/90">
-          Get Started
+        <button className="bg-cyan hover:bg-c text-white w-fit py-4 px-8 mt-4 rounded-full font-medium hover:bg-cyan/90">
+          <a
+            href="#input"
+            onClick={() => {
+              document
+                .getElementById("linksSection")
+                .scrollIntoView({ behavior: "smooth" });
+            }}
+          >
+            Get Started
+          </a>
         </button>
       </div>
 

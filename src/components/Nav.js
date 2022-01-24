@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "../assets/images/logo.svg";
 import Logo from "./Logo";
 export default function Nav() {
   return (
@@ -27,7 +26,7 @@ export default function Nav() {
 
         <div className="flex ml-auto justify-between w-44 ">
           <button className="text-gray font-medium">Login</button>
-          <button className="bg-cyan rounded-3xl w-28 py-3 text-white hover:bg-cyan/80">
+          <button className="bg-cyan rounded-3xl py-2 px-4 text-white hover:bg-cyan/80">
             Sign Up
           </button>
         </div>

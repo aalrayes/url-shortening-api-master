@@ -2,7 +2,7 @@ import "./App.css";
 import BoostLinks from "./components/BoostLinks";
 import Footer from "./components/Footer";
 import Hero from "./components/Hero";
-import LinkShortner from "./components/LinkShortner";
+import LinkShortener from "./components/LinkShortener";
 import Nav from "./components/Nav";
 import Statistics from "./components/Statistics";
 function App() {
@@ -11,7 +11,7 @@ function App() {
       <main className=" w-desktop mx-auto font-poppins  ">
         <Nav />
         <Hero />
-        <LinkShortner />
+        <LinkShortener />
       </main>
       <Statistics />
       <BoostLinks />

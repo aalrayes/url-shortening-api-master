@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-export default function LinkShortner() {
+export default function LinkShortener() {
   const [link, setLink] = useState("");
   const [shortLinks, setShortLinks] = useState(
     JSON.parse(localStorage.getItem("links") || "[]")
   );
+
+  const [auth, setAuth] = useState(false);
+
+  const authClass = ["border-4 border-red", ""];
 
   useEffect(() => {
     window.localStorage.setItem("links", JSON.stringify(shortLinks));
@@ -25,23 +29,45 @@ export default function LinkShortner() {
   const handleChange = (e) => {
     setLink(e.target.value);
   };
+
+  const toggleAuthClasses = () => {
+    setAuth(!auth);
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    getShortenedLink();
+    if (link !== "") {
+      getShortenedLink();
+    } else {
+      console.log("empty");
+      return auth ? "" : toggleAuthClasses();
+    }
   };
-
   return (
-    <section className="mx-auto bg-darkViolet py-14 px-14 z-10 rounded-md bg-link-pattern-desktop bg-cover mt-9 relative -bottom-20">
+    <section
+      className="mx-auto bg-darkViolet py-14 px-14 z-10 rounded-md bg-link-pattern-desktop  bg-cover mt-9 relative -bottom-20 border-1"
+      id="linksSection"
+    >
       <form className="flex justify-between">
-        <input
-          type="text"
-          value={link}
-          onChange={handleChange}
-          className="rounded-lg px-5 py-2 w-5/6 h-16 font-bold placeholder:text-grayishViolet "
-          placeholder="Shorten a link here..."
-        />
+        <div className="flex flex-col w-5/6">
+          <input
+            type="text"
+            value={link}
+            id="linkInput"
+            onChange={handleChange}
+            onKeyPress={auth ? toggleAuthClasses : ""}
+            className={`rounded-lg px-5 py-2 w-full h-16 font-bold placeholder:text-grayishViolet ${
+              authClass[auth ? 0 : 1]
+            }`}
+            placeholder="Shorten a link here..."
+            required
+          />
+          {auth && (
+            <div className="text-red font-poppins mt-2">Please add a link</div>
+          )}
+        </div>
+
         <button
-          className="bg-cyan w-40 p-4 rounded-lg font-bold text-white hover:bg-cyan/80"
+          className="bg-cyan w-fit py-2 h-16  px-8 rounded-lg font-bold text-white hover:bg-cyan/80"
           onClick={handleSubmit}
         >
           Shorten It!
@@ -64,7 +90,7 @@ export default function LinkShortner() {
                 >
                   {link.result.short_link}
                 </a>
-                <button className="text-white bg-cyan rounded-md w-24 h-9 ml-5 hover:bg-cyan/80">
+                <button className="text-white bg-cyan rounded-md px-6 py-3 ml-5 hover:bg-cyan/80">
                   copy
                 </button>
               </div>
