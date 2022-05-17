@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 export default function LinkShortener() {
   const [link, setLink] = useState("");
   const [shortLinks, setShortLinks] = useState(
     JSON.parse(localStorage.getItem("links") || "[]")
   );
-
   const [auth, setAuth] = useState(false);
+  const copyRef = useRef();
 
   const authClass = ["border-4 border-red", ""];
 
+  const copyLink = () => {
+    console.log(copyRef.current);
+  };
   useEffect(() => {
     window.localStorage.setItem("links", JSON.stringify(shortLinks));
   }, [shortLinks]);
@@ -29,7 +32,6 @@ export default function LinkShortener() {
   const handleChange = (e) => {
     setLink(e.target.value);
   };
-
   const toggleAuthClasses = () => {
     setAuth(!auth);
   };
@@ -54,7 +56,13 @@ export default function LinkShortener() {
             value={link}
             id="linkInput"
             onChange={handleChange}
-            onKeyPress={auth ? toggleAuthClasses : ""}
+            onKeyPress={
+              auth
+                ? toggleAuthClasses
+                : () => {
+                    return "";
+                  }
+            }
             className={`rounded-lg px-5 py-2 w-full h-16 font-bold placeholder:text-grayishViolet ${
               authClass[auth ? 0 : 1]
             }`}
@@ -90,7 +98,22 @@ export default function LinkShortener() {
                 >
                   {link.result.short_link}
                 </a>
-                <button className="text-white bg-cyan rounded-md px-6 py-3 ml-5 hover:bg-cyan/80">
+                <button
+                  onClick={() => {
+                    navigator.clipboard
+                      .writeText(link.result.full_short_link)
+                      .then(
+                        function () {
+                          alert("copy is done");
+                        },
+                        function () {
+                          alert("copy failed");
+                        }
+                      );
+                  }}
+                  ref={copyRef}
+                  className="text-white bg-cyan rounded-md px-6 py-3 ml-5 hover:bg-cyan/80"
+                >
                   copy
                 </button>
               </div>
