@@ -1,18 +1,15 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Link from "./Link";
 export default function LinkShortener() {
   const [link, setLink] = useState("");
   const [shortLinks, setShortLinks] = useState(
     JSON.parse(localStorage.getItem("links") || "[]")
   );
   const [auth, setAuth] = useState(false);
-  const copyRef = useRef();
 
   const authClass = ["border-4 border-red", ""];
 
-  const copyLink = () => {
-    console.log(copyRef.current);
-  };
   useEffect(() => {
     window.localStorage.setItem("links", JSON.stringify(shortLinks));
   }, [shortLinks]);
@@ -23,7 +20,13 @@ export default function LinkShortener() {
       .get(url + link)
       .then((res) => res.data)
       .then((res) => {
-        setShortLinks([...shortLinks, res]);
+        console.log(res);
+        if (res.ok) {
+          setShortLinks([...shortLinks, res]);
+        } else {
+          console.log(res.error);
+          setAuth(res.error);
+        }
       });
 
     setLink("");
@@ -32,15 +35,19 @@ export default function LinkShortener() {
   const handleChange = (e) => {
     setLink(e.target.value);
   };
-  const toggleAuthClasses = () => {
-    setAuth(!auth);
-  };
+
+  const toggleAuthClasses = () => {};
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (link !== "") {
+    const regex =
+      /[(http(s) ?): /(www)?a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/gi;
+    const isValid = regex.test(link);
+
+    if (isValid) {
       getShortenedLink();
     } else {
-      console.log("empty");
+      console.log("invalid url");
       return auth ? "" : toggleAuthClasses();
     }
   };
@@ -57,7 +64,7 @@ export default function LinkShortener() {
             id="linkInput"
             onChange={handleChange}
             onKeyPress={
-              auth
+              auth.length >= 1
                 ? toggleAuthClasses
                 : () => {
                     return "";
@@ -69,9 +76,7 @@ export default function LinkShortener() {
             placeholder="Shorten a link here..."
             required
           />
-          {auth && (
-            <div className="text-red font-poppins mt-2">Please add a link</div>
-          )}
+          {auth && <div className="text-red font-poppins mt-2">{auth}</div>}
         </div>
 
         <button
@@ -84,41 +89,7 @@ export default function LinkShortener() {
 
       <div className="flex flex-col">
         {shortLinks.map((link) => {
-          return (
-            <div
-              key={link.result.code}
-              className="bg-white flex justify-between mt-5 rounded-lg p-5 font-poppins "
-            >
-              <span className="my-auto">{link.result.original_link}</span>
-
-              <div className="flex">
-                <a
-                  className="text-cyan my-auto"
-                  href={link.result.full_short_link}
-                >
-                  {link.result.short_link}
-                </a>
-                <button
-                  onClick={() => {
-                    navigator.clipboard
-                      .writeText(link.result.full_short_link)
-                      .then(
-                        function () {
-                          alert("copy is done");
-                        },
-                        function () {
-                          alert("copy failed");
-                        }
-                      );
-                  }}
-                  ref={copyRef}
-                  className="text-white bg-cyan rounded-md px-6 py-3 ml-5 hover:bg-cyan/80"
-                >
-                  copy
-                </button>
-              </div>
-            </div>
-          );
+          return <Link key={link.result.code} link={link} />;
         })}
       </div>
     </section>
