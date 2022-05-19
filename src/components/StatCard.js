@@ -4,7 +4,7 @@ const Statcard = ({ icon, alt, title, description, order }) => {
   const cardPosition = ["mt-5", "mt-16", "mt-32"];
   return (
     <section className="flex flex-col lg:flex-row">
-      <div className={"h-72 rounded-md bg-white p-5 lg:" + cardPosition[order]}>
+      <div className={"h-72 rounded-md bg-white p-5 lg: " + cardPosition[order]}>
         <div className="relative -top-16 z-10 mx-auto w-fit rounded-full bg-darkViolet p-5 text-cyan md:mx-0">
           <img src={icon} alt={alt} />
         </div>
