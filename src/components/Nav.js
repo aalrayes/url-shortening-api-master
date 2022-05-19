@@ -1,14 +1,14 @@
-import React,{useState} from "react";
+import React from "react";
 import Logo from "./Logo";
 import { IoMenu } from "react-icons/io5";
-import MobileNav from "./MobileNav";
+// import MobileNav from "./MobileNav";
 export default function Nav() {
 
-  const [showMenu, setShowMenu] = useState(false);
+  // const [showMenu, setShowMenu] = useState(false);
   
-  const toggleMenu = () => {
-    setShowMenu((prevState) => !prevState);
-}
+//   const toggleMenu = () => {
+//     setShowMenu((prevState) => !prevState);
+// }
   return (
     <header className="mx-auto mt-7 w-full ">
       <nav className="flex">
@@ -40,8 +40,8 @@ export default function Nav() {
           </button>
         </div>
 
-        <IoMenu onClick={toggleMenu} className="ml-auto cursor-pointer text-3xl text-gray md:hidden" />
-        {showMenu && <MobileNav/>}
+        <IoMenu className="ml-auto cursor-pointer text-3xl text-gray md:hidden" />
+        {/* {showMenu && <MobileNav/>} */}
 
       </nav>
     </header>
