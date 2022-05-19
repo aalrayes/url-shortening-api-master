@@ -29,19 +29,19 @@ export default function Statistics() {
     },
   ];
   return (
-    <section className="bg-slate-100 w-screen  font-poppins pb-20">
-      <div className=" max-w-desktop w-5/6  flex-col mx-auto p-10">
+    <section className="w-screen bg-slate-100  pb-20 font-poppins">
+      <div className=" mx-auto w-5/6  max-w-desktop flex-col p-10">
         <div className="flex flex-col">
-          <h1 className="text-veryDarkBlue text-center mt-32 text-4xl font-bold">
+          <h1 className="mt-32 text-center text-lg font-bold text-veryDarkBlue lg:text-4xl">
             Advanced Statistics
           </h1>
-          <p className="text-grayishViolet text-body text-center w-1/2 mt-4 mx-auto">
+          <p className="mx-auto mt-4 w-11/12 text-center text-body text-grayishViolet lg:w-1/2">
             Track how your links are performing across the web with our advanced
             statistics dashboard.
           </p>
         </div>
 
-        <div className=" flex mt-20">
+        <div className=" mx-auto mt-20 flex flex-col lg:flex-row">
           {stats.map((item, index) => {
             return <Statcard key={index} {...item} order={index} />;
           })}

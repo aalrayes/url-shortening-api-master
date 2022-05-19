@@ -3,25 +3,27 @@ import React from "react";
 const Statcard = ({ icon, alt, title, description, order }) => {
   const cardPosition = ["mt-5", "mt-16", "mt-32"];
   return (
-    <section className="flex">
-      <div className={"bg-white rounded-md p-5 h-72 " + cardPosition[order]}>
-        <div className="bg-darkViolet rounded-full text-cyan w-fit p-5 relative -top-16 z-10">
+    <section className="flex flex-col lg:flex-row">
+      <div className={"lg: h-72 rounded-md bg-white p-5" + cardPosition[order]}>
+        <div className="relative -top-16 z-10 mx-auto w-fit rounded-full bg-darkViolet p-5 text-cyan md:mx-0">
           <img src={icon} alt={alt} />
         </div>
 
         <div className="flex flex-col justify-between ">
-          <h2 className="font-bold text-veryDarkBlue text-2xl mb-5 -mt-8">
+          <h2 className="mb-5 -mt-8 text-2xl font-bold text-veryDarkBlue">
             {" "}
             {title}
           </h2>
 
-          <p className="font-medium text-grayishViolet text-body">
+          <p className="text-body font-medium text-grayishViolet">
             {description}
           </p>
         </div>
       </div>
 
-      {order !== 2 && <div className="bg-cyan w-48 h-2 my-auto mx-auto"></div>}
+      {order !== 2 && (
+        <div className="my-auto mx-auto h-40 w-2 bg-cyan lg:h-2 lg:w-48"></div>
+      )}
     </section>
   );
 };

@@ -53,11 +53,11 @@ export default function LinkShortener() {
   };
   return (
     <section
-      className="mx-auto bg-darkViolet py-14 px-14 z-10 rounded-md bg-link-pattern-desktop  bg-cover mt-9 relative -bottom-20 border-1"
+      className="border-1 relative -bottom-20 z-10 mx-auto mt-9 rounded-md  bg-darkViolet bg-link-pattern-desktop bg-cover py-14 px-14"
       id="linksSection"
     >
-      <form className="flex justify-between">
-        <div className="flex flex-col w-5/6">
+      <form className="flex flex-col justify-between lg:flex-row">
+        <div className="flex w-5/6 flex-col">
           <input
             type="text"
             value={link}
@@ -70,17 +70,17 @@ export default function LinkShortener() {
                     return "";
                   }
             }
-            className={`rounded-lg px-5 py-2 w-full h-16 font-bold placeholder:text-grayishViolet ${
+            className={`h-16 w-full rounded-lg px-5 py-2 font-bold placeholder:text-grayishViolet ${
               authClass[auth ? 0 : 1]
             }`}
             placeholder="Shorten a link here..."
             required
           />
-          {auth && <div className="text-red font-poppins mt-2">{auth}</div>}
+          {auth && <div className="mt-2 font-poppins text-red">{auth}</div>}
         </div>
 
         <button
-          className="bg-cyan w-fit py-2 h-16  px-8 rounded-lg font-bold text-white hover:bg-cyan/80"
+          className="w-100 mt-5 h-16 rounded-lg bg-cyan py-2  px-8 font-bold text-white hover:bg-cyan/80 lg:w-fit"
           onClick={handleSubmit}
         >
           Shorten It!
