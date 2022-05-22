@@ -1,6 +1,6 @@
 import React from "react";
 
-const Statcard = ({ icon, alt, title, description, order }) => {
+const StatCard = ({ icon, alt, title, description, order }) => {
   const cardPosition = ["mt-5", "mt-16", "mt-32"];
   return (
     <section className="flex flex-col lg:flex-row">
@@ -28,4 +28,4 @@ const Statcard = ({ icon, alt, title, description, order }) => {
   );
 };
 
-export default Statcard;
+export default StatCard;
