@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+ import React, { useRef, useState } from "react";
 
 const Link = ({ link }) => {
   const copyRef = useRef();
@@ -6,14 +6,16 @@ const Link = ({ link }) => {
   return (
     <div
       key={link.result.code}
-      className="mt-5 flex justify-between rounded-lg bg-white p-5 font-poppins "
+      className="mt-5 flex justify-between rounded-lg flex-col md:flex-row bg-white p-5 font-poppins "
     >
-      <span className="my-auto">{link.result.original_link}</span>
+      <span className="my-auto text-center">{link.result.original_link}</span>
 
-      <div className="flex">
-        <a className="my-auto text-cyan" href={link.result.full_short_link}>
+      <div className="flex flex-col md:flex-row my-1">
+
+        <a className="md:my-auto my-2 text-center  text-cyan" href={link.result.full_short_link}>
           {link.result.short_link}
         </a>
+       
         <button
           onClick={() => {
             navigator.clipboard.writeText(link.result.full_short_link).then(

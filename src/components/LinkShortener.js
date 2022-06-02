@@ -36,7 +36,9 @@ export default function LinkShortener() {
     setLink(e.target.value);
   };
 
-  const toggleAuthClasses = () => {};
+  const toggleAuthClasses = () => {
+    setAuth((prevState) => !prevState)
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,7 +50,7 @@ export default function LinkShortener() {
       getShortenedLink();
     } else {
       console.log("invalid url");
-      return auth ? "" : toggleAuthClasses();
+      return auth ? "" :toggleAuthClasses();
     }
   };
   return (
@@ -64,7 +66,7 @@ export default function LinkShortener() {
             id="linkInput"
             onChange={handleChange}
             onKeyPress={
-              auth.length >= 1
+              auth
                 ? toggleAuthClasses
                 : () => {
                     return "";
@@ -76,7 +78,7 @@ export default function LinkShortener() {
             placeholder="Shorten a link here..."
             required
           />
-          {auth && <div className="mt-2 font-poppins text-red">{auth}</div>}
+          {auth && <div className="mt-2 font-poppins text-red">Please enter a valid URL</div>}
         </div>
 
         <button
