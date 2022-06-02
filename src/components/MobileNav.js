@@ -1,23 +1,24 @@
 import React from 'react';
 import {IoClose} from "react-icons/io5"
 
-const MobileNav = () => {
+const MobileNav = ({handleToggle}) => {
     return (
-           <div className=" h-full w-full bg-red absolute z-50 right-0">
-         <IoClose className=' text-4xl ml-auto text-zinc-600 cursor-pointer'/>      
-     <ul className="my-1 justify-start text-center mr-3 flex flex-col font-bold text-gray ">
+      <div className=" h-64  w-full bg-violet-900
+            rounded-2xl absolute z-50 right-0">
+         <IoClose onClick={handleToggle} className=' text-4xl mt-2 mr-3 ml-auto text-white cursor-pointer'/>      
+     <ul className="my-1 justify-between text-center mr-3 flex flex-col font-bold text-white text-xl">
           <li>
-            <a className="hover:text-veryDarkBlue" href="/">
+            <a className="hover:text-veryDarkBlue m-5" href="/">
               Features
             </a>
           </li>
           <li>
-            <a className="hover:text-veryDarkBlue" href="/">
+            <a className="hover:text-veryDarkBlue m-5" href="/">
               Pricing
             </a>
           </li>
           <li>
-            <a className="hover:text-veryDarkBlue" href="/">
+            <a className="hover:text-veryDarkBlue m-5" href="/">
               Resources
             </a>
           </li>
